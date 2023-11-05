@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>infinito.3</title>
+    <style>
+         /* Style the timer */
+    .timer {
+        position: absolute;
+        margin: auto;
+        width: 200px;
+        height: 200px;
+      }
+  
+      /* Style the circle */
+      .circle {
+        fill: none;
+        stroke: #333;
+        stroke-width: 4px;
+      }
+  
+      /* Style the circle progress */
+      .circle-progress {
+        fill: none;
+        stroke: rgb(68, 0, 255);
+        stroke-width: 10px;
+        stroke-dasharray: 628px; /* The circumference of the circle is 2*pi*r = 2*3.14*100 = 628px */
+        stroke-dashoffset: 0px; /* The initial offset of the dash */
+        transition: stroke-dashoffset 1s linear; /* The transition effect for the dash offset */
+      }
+  
+      /* Style the time value */
+      .time {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: Arial, sans-serif;
+        font-size: 48px;
+        font-weight: bold;
+      }
+
+
+        #btn3{ 
+            width: 150px;
+            height: 50px;
+            border-color: rgb(51, 49, 49);
+            color: rgb(79, 79, 75);
+            background-color: rgb(69, 68, 68);
+            position: absolute;
+            left: 720px;
+            top: 230px;
+            filter:blur(100px) brightness(0) contrast(9);
+           }
+    </style>
+</head>
+<body>
+
+    <div class="timer">
+        <svg width="200" height="200" viewBox="0 0 200 200">
+          <circle class="circle" cx="100" cy="100" r="100"/>
+          <circle class="circle-progress" cx="100" cy="100" r="100"/>
+        </svg>
+        <span class="time">15</span>
+      </div>
+
+    <div>
+        <img id="image2" src="https://thebellelady.com/wp-content/uploads/2020/08/BTSCOMEBACK2-1.jpg" alt="third" height="750px" width="1600px" >
+       <a href="http://127.0.0.1:5500/INIFINITO/infinito4.html"><button type="button" onclick="end()" id="btn3">,</button></a> 
+    </div>
+    <script>
+        var target = document.getElementById("btn3");
+    var audio = new Audio("cat meow.mp3");
+    document.addEventListener("mousemove", function(event) {
+      var x = event.clientX;
+      var y = event.clientY;
+      var rect = target.getBoundingClientRect();
+      var distance = Math.sqrt(Math.pow(x - rect.left, 2) + Math.pow(y - rect.top, 2));
+      var volume = 1 - (distance /800);
+      if (volume < 0) {
+        volume = 0;
+      }
+      audio.volume = volume;
+      audio.play();
+    });
+    
+      </script>
+
+      <script>
+        // Get the elements
+        var circle = document.querySelector(".circle-progress");
+        var time = document.querySelector(".time");
+    
+        // Set the duration
+        var duration = 15; // seconds
+    
+        // Set the initial values
+        var currentTime = duration;
+        var initialOffset = 628; // The initial offset of the dash
+        var offset = initialOffset;
+    
+        // Update the timer every second
+        var interval = setInterval(function() {
+          // Decrease the current time
+          currentTime--;
+    
+          // Update the time value
+          time.textContent = currentTime;
+    
+          // Calculate the new offset
+          offset = initialOffset - (initialOffset * currentTime / duration);
+    
+          // Update the dash offset
+          circle.style.strokeDashoffset = offset;
+    
+          // Check if the timer is over
+          if (currentTime <= 0) {
+            // Stop the interval
+            clearInterval(interval);
+    
+            // Redirect to another webpage
+            window.location.replace("http://127.0.0.1:5500/INIFINITO/infinito4.html");
+          }
+        }, 1000);
+      </script>
+      </body>
+    </html>
+</body>
+</html>
