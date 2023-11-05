@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inifinito.2</title>
+    <style>
+         /* Style the timer */
+    .timer {
+        position: absolute;
+        margin: auto;
+        width: 200px;
+        height: 200px;
+      }
+  
+      /* Style the circle */
+      .circle {
+        fill: none;
+        stroke: #333;
+        stroke-width: 4px;
+      }
+  
+      /* Style the circle progress */
+      .circle-progress {
+        fill: none;
+        stroke: rgb(115, 0, 255);
+        stroke-width: 10px;
+        stroke-dasharray: 628px; /* The circumference of the circle is 2*pi*r = 2*3.14*100 = 628px */
+        stroke-dashoffset: 0px; /* The initial offset of the dash */
+        transition: stroke-dashoffset 1s linear; /* The transition effect for the dash offset */
+      }
+  
+      /* Style the time value */
+      .time {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: Arial, sans-serif;
+        font-size: 48px;
+        font-weight: bold;
+      }
+
+
+        #btn2{ 
+            width: 75px;
+            height: 80px;
+            border-color: rgb(234, 165, 81);
+            color: rgb(192, 121, 33);
+            background-color: rgb(173, 142, 39);
+            position: absolute;
+            right: 220px;
+            top: 380px;
+            filter:blur(75px) brightness(0) contrast(2);
+           }
+    </style>
+</head>
+<body>
+    <div class="timer">
+        <svg width="200" height="200" viewBox="0 0 200 200">
+          <circle class="circle" cx="100" cy="100" r="100"/>
+          <circle class="circle-progress" cx="100" cy="100" r="100"/>
+        </svg>
+        <span class="time">20</span>
+      </div>
+
+    <img id="image1" src="https://www.sunnyskyz.com/uploads/2014/04/hqzth-giraffe.jpg" height="750px" width="1600px" alt="second">
+    <div>
+        <a href="http://127.0.0.1:5500/INIFINITO/infinito3.html"><button type="button" onclick="next2()" id="btn2">,</button></a> 
+       
+        </div>
+        <script>
+            var target = document.getElementById("btn2");
+        var audio = new Audio("Censor Beep Sound 5 seconds.mp3");
+        document.addEventListener("mousemove", function(event) {
+          var x = event.clientX;
+          var y = event.clientY;
+          var rect = target.getBoundingClientRect();
+          var distance = Math.sqrt(Math.pow(x - rect.left, 2) + Math.pow(y - rect.top, 2));
+          var volume = 1 - (distance /800);
+          if (volume < 0) {
+            volume = 0;
+          }
+          audio.volume = volume;
+          audio.play();
+        });
+        
+          </script>
+
+          <script>
+            // Get the elements
+            var circle = document.querySelector(".circle-progress");
+            var time = document.querySelector(".time");
+        
+            // Set the duration
+            var duration = 20; // seconds
+        
+            // Set the initial values
+            var currentTime = duration;
+            var initialOffset = 628; // The initial offset of the dash
+            var offset = initialOffset;
+        
+            // Update the timer every second
+            var interval = setInterval(function() {
+              // Decrease the current time
+              currentTime--;
+        
+              // Update the time value
+              time.textContent = currentTime;
+        
+              // Calculate the new offset
+              offset = initialOffset - (initialOffset * currentTime / duration);
+        
+              // Update the dash offset
+              circle.style.strokeDashoffset = offset;
+        
+              // Check if the timer is over
+              if (currentTime <= 0) {
+                // Stop the interval
+                clearInterval(interval);
+        
+                // Redirect to another webpage
+                window.location.replace("http://127.0.0.1:5500/INIFINITO/infinito3.html");
+              }
+            }, 1000);
+          </script>
+          </body>
+        </html>
+</body>
+</html>
